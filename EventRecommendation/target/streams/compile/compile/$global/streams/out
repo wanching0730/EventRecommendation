@@ -1,0 +1,67 @@
+[0m[[0m[31merror[0m] [0m[0m/Users/wanching/Documents/MovieRecommendation/MovieRecommendation/src/main/scala/recommendation.scala:8:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mval spark = SparkSession.builder.master("local[*]").appName("Spark Word Count").getOrCreate()[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/wanching/Documents/MovieRecommendation/MovieRecommendation/src/main/scala/recommendation.scala:9:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mval sc = spark.sparkContext[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/wanching/Documents/MovieRecommendation/MovieRecommendation/src/main/scala/recommendation.scala:13:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mval ratings = sc.textFile("s3://aws-emr-resources-096889944571-us-east-2/file.txt")[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/wanching/Documents/MovieRecommendation/MovieRecommendation/src/main/scala/recommendation.scala:15:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mval ratingSplit = ratings.map(_.split("\n"))[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/wanching/Documents/MovieRecommendation/MovieRecommendation/src/main/scala/recommendation.scala:17:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mval ratingFlatten = ratingSplit.flatMap(x => x)[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/wanching/Documents/MovieRecommendation/MovieRecommendation/src/main/scala/recommendation.scala:19:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mval ratingDF = ratingFlatten.map(arr => {[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/wanching/Documents/MovieRecommendation/MovieRecommendation/src/main/scala/recommendation.scala:26:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mval Array(training, test) = ratingDF.randomSplit(Array(0.8, 0.2))[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/wanching/Documents/MovieRecommendation/MovieRecommendation/src/main/scala/recommendation.scala:27:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mval als = new ALS().setMaxIter(5).setRegParam(0.01).setUserCol("userId").setItemCol("eventId").setRatingCol("rating")[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/wanching/Documents/MovieRecommendation/MovieRecommendation/src/main/scala/recommendation.scala:28:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mval model = als.fit(training)[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/wanching/Documents/MovieRecommendation/MovieRecommendation/src/main/scala/recommendation.scala:30:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mval predictions = model.transform(test)[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/wanching/Documents/MovieRecommendation/MovieRecommendation/src/main/scala/recommendation.scala:32:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mval evaluator = new RegressionEvaluator().setMetricName("rmse").setLabelCol("rating").setPredictionCol("prediction")[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/wanching/Documents/MovieRecommendation/MovieRecommendation/src/main/scala/recommendation.scala:33:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mval rmse = evaluator.evaluate(predictions)[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/wanching/Documents/MovieRecommendation/MovieRecommendation/src/main/scala/recommendation.scala:34:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mprintln(s"Root-mean-square error = $rmse")[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/wanching/Documents/MovieRecommendation/MovieRecommendation/src/main/scala/recommendation.scala:38:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mval userRecs = model.recommendForAllUsers(10)[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/wanching/Documents/MovieRecommendation/MovieRecommendation/src/main/scala/recommendation.scala:39:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0muserRecs.select("recommendations").show(false)[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/wanching/Documents/MovieRecommendation/MovieRecommendation/src/main/scala/recommendation.scala:43:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mval df1 = userRecs.withColumn("userId", userRecs.col("userId").cast("string")).select("userId")[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/wanching/Documents/MovieRecommendation/MovieRecommendation/src/main/scala/recommendation.scala:44:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mval df2 = userRecs.withColumn("eventId", userRecs.col("recommendations.eventId").cast("string")).select("eventId")[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/wanching/Documents/MovieRecommendation/MovieRecommendation/src/main/scala/recommendation.scala:45:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mval df3 = userRecs.withColumn("rating", userRecs.col("recommendations.rating").cast("string")).select("rating")[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/wanching/Documents/MovieRecommendation/MovieRecommendation/src/main/scala/recommendation.scala:47:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mval df4 = df1.withColumn("id", monotonically_increasing_id()).join(df2.withColumn("id", monotonically_increasing_id()), Seq("id")).join(df3.withColumn("id", monotonically_increasing_id()), Seq("id")).drop("id")[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/wanching/Documents/MovieRecommendation/MovieRecommendation/src/main/scala/recommendation.scala:48:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mdf4.show(false)[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/wanching/Documents/MovieRecommendation/MovieRecommendation/src/main/scala/recommendation.scala:51:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mval outputFileUri = s"s3n://aws-emr-resources-096889944571-us-east-2/file6.txt"[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/wanching/Documents/MovieRecommendation/MovieRecommendation/src/main/scala/recommendation.scala:52:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mdf4.repartition(1).write.csv(outputFileUri)[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m22 errors found[0m
